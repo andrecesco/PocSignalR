@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "PocSignalR": {
+      "commandName": "Project",
+      "commandLineArgs": "--verbose --port 7194",
+      "launchBrowser": false
+    }
+  }
+}
