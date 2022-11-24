@@ -1,5 +1,5 @@
 # PocSignalR
-Para utilizar esse projeto é necessário criar o seu arquivo local.settings.json seguido a estrutura abaixo
+Para utilizar esse projeto é necessário criar o seu arquivo local.settings.json na function seguido a estrutura abaixo
 ```
 {
   "IsEncrypted": false,
