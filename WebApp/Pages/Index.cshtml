@@ -1,0 +1,41 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.0/signalr.js" integrity="sha512-fSANdN8+nNTcjPP1LFFB7uc/B4lF/sSsr0Ak+QX7s4saNXza2aCaYkIKKMDpVV4KSoCMI+9W4KkRbVeUZgH+0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<h3 id="myMessage"></h3>
+
+<script>
+    $(document).ready(function () {
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("http://localhost:7194/api")
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        connection.onclose(start);
+        start(connection);
+    });
+
+    async function start(connection) {
+        try {
+            await connection.start();
+            console.log("SignalR Connected");
+            connection.on("myMessage", (message) => {
+                $("#myMessage").html(message)
+                console.log(message);
+            });
+        } catch (err) {
+            console.log(err);
+            setTimeout(start, 5000);
+        }
+    }
+</script>
